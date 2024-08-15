@@ -1,4 +1,4 @@
-#AI Chatbot
+# AI Chatbot
 Welcome to the AI Chatbot project! 🤖✨
 
 ![](https://github.com/HeadstarterAI-TrackC/ai-customer-support/blob/main/public/chatbotdemo-ezgif.com-video-to-gif-converter.gif)
