@@ -1,8 +1,20 @@
 "use client";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Dashboard = () => {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to /home if the user is logged in
+    if (session) {
+      router.push("/home");
+    }
+  }, [session, router]);
+
   return (
     <div className="flex h-screen">
       {/* AI Chatbot Section */}
