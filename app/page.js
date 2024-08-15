@@ -2,24 +2,24 @@
 import Image from "next/image";
 import { useState } from "react";
 import * as React from 'react';
-import {Box, Stack, TextField, Button } from "@mui/material";
+import {Box, Stack, TextField, Button, Typography } from "@mui/material";
 import './globals.css';
 
 export default function Home() {
   const [messages, setMessages] = useState([
     {role: 'assistant',
-    content: 'Hello, how can I help you today?'} // change this
+    content: 'Hello, how are you doing today?'} 
   ]);
 
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const sendMessage = async() => {
-    setMessage('')
-    setMessages((message)=>[
-      ...messages,
-      {role:'user', content: message},
-      {role: 'assistant', content: ''}
-    ])
-  }
+    setMessage('');  // Clear the input
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { role: 'user', content: message },
+      { role: 'assistant', content: '' }
+    ]);
+  
   const response = fetch('/api/chat', {
     method: 'POST',
     headers: {
@@ -38,7 +38,7 @@ export default function Home() {
       const text = decoder.decode(value || new IntBArray(), {stream: true});
       setMessages((messages)=>{
         let lastMessage = messages[messages.length - 1]
-        let otherMessages = messages.slice(0, -1);
+        let otherMessages = messages.slice(0, messages.length-1);
         return([
           ...otherMessages,
           {
@@ -52,14 +52,25 @@ export default function Home() {
     return reader.read().then(processText);
     })
   })
+};
   return (
-    <Box display={'flex'} justifyContent={'center'} alignItems={'center'}
+    <Box 
+    className="bg-[url('/background.svg')]"
+    height={'100vh'}
+    display={'flex'} flexDirection={'column'} 
+    justifyContent={'center'} alignItems={'center'}
     >
+      <Typography 
+      variant="h3"
+      marginTop={'1%'}
+      color={'white'}
+      >Your AI friend</Typography>
       <Stack
+      className="rounded-lg shadow-2xl bg-white"
       direction={'column'}
-      width="600px"
-      height="700px"
-      border={'1px solid black'}
+      width="40%"
+      height="500px"
+      marginTop={'1%'}
       p={2}
       spacing={2}>
         <Stack 
@@ -69,10 +80,12 @@ export default function Home() {
         overflow={'auto'}
         maxHeight={'100%'}>
           {messages.map((message, index)=>(
-            <Box key={index} display={'flex'} justifyContent={
+            <Box 
+            
+            key={index} display={'flex'} justifyContent={
             message.role === 'assistant' ? 'flex-start' : 'flex-end'}>
               <Box
-                bgcolor={message.role === 'assistant' ? 'primary.main' : 'secondary.main'}
+                bgcolor={message.role === 'assistant' ? '#009dee' : '#d49dff'}
                 color={'white'}
                 borderRadius={16}
                 p={3}
@@ -94,8 +107,14 @@ export default function Home() {
         />
         <Button variant="contained" onClick={sendMessage}>Send</Button>
       </Stack>
-      </Stack>
       
+      </Stack>
+      <button type="button" className="text-white bg-blue-700
+       hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 
+       font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2
+        dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
+         dark:focus:ring-blue-800 mt-2
+         shadow-lg shadow-blue-500/50">LOG OUT</button>
     </Box>
   );
 }

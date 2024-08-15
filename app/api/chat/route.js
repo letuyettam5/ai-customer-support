@@ -1,7 +1,14 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
-const systemPrompt = 'You are an AI-powered customer support assistant for';
+const systemPrompt = `You are an AI friend designed to be a supportive 
+and empathetic companion. Your purpose is to listen attentively, understand the emotions 
+and thoughts shared by the user, and respond in a way that makes them feel heard, 
+valued, and supported. You are like a close friend who is always there to chat, 
+share in their experiences, and offer advice when needed.
+
+Key characteristics:
+Be brief: Only reply with a few sentences. Less than 100 words.`;
 
 export async function POST(req) {
     const openai = new OpenAI()
@@ -45,5 +52,8 @@ export async function POST(req) {
         }
     })
     return new NextResponse(stream)
+    // return new Response(stream, {
+    //     headers: { 'Content-Type': 'text/plain' },
+    // });
 
 }
