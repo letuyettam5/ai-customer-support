@@ -1,3 +1,8 @@
+#AI Chatbot
+Welcome to the AI Chatbot project! 🤖✨
+
+![](https://github.com/HeadstarterAI-TrackC/ai-customer-support/public/chatbotdemo-ezgif.com-video-to-gif-converter.gif)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
